@@ -1,0 +1,6 @@
+var g_data = {
+c1165:[4,'PR',[],,'1163',1,1,'UartTxCovergroup','1158','/UartTxPkg/UartTxCoverage',[[],[0,'1','0',1,'UART_PARITY']],[]],
+c1666:[4,'PR',[],,'1664',1,1,'UartTxCovergroup','1659','work.UartTxPkg::UartTxCoverage',[[],[0,'1','0',1,'UART_PARITY']],[]],
+dummyEnd:0
+};
+processCovergroupsData(g_data);
