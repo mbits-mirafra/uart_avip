@@ -1,0 +1,22 @@
+var g_data = {
+g1046:[{dummy:0},
+{name:'UartRxCovergroup',f:1,type:1,id:1051,tb:'0',h:'0',m:'0',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],opts:[[],['merge_instance','auto(true)']],parent:'1046'}],
+c1051:{name:'UartRxCovergroup',type:1,pHash:'1046',pPath:'/UartRxPkg/UartRxCoverage',totals:[0,0,'0.00%','R',0,0,'0.00%','R'],cvp:[{dummy:0},
+{name:'RX',f:1,type:4,id:1052,tb:'0',h:'0',m:'0',hp:'00.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],parent:'1051'}],crx:[{dummy:0}]},
+g1158:[{dummy:0},
+{name:'UartTxCovergroup',f:1,type:1,id:1163,tb:'1',h:'0',m:'1',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],opts:[[],['merge_instance','auto(true)']],parent:'1158'}],
+c1163:{name:'UartTxCovergroup',type:1,pHash:'1158',pPath:'/UartTxPkg/UartTxCoverage',totals:[1,0,'0.00%','R',0,0,'0.00%','R'],cvp:[{dummy:0},
+{name:'TX',f:1,type:4,id:1164,tb:'0',h:'0',m:'0',hp:'00.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],parent:'1163'},
+{name:'PR',f:1,type:4,id:1165,tb:'1',h:'0',m:'1',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],hasb:1,parent:'1163'}],crx:[{dummy:0}]},
+g1464:[{dummy:0},
+{name:'UartRxCovergroup',f:1,type:1,id:1469,tb:'0',h:'0',m:'0',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],opts:[[],['merge_instance','true']],parent:'1464'}],
+c1469:{name:'UartRxCovergroup',type:1,pHash:'1464',pPath:'work.UartRxPkg::UartRxCoverage',totals:[0,0,'0.00%','R',0,0,'0.00%','R'],cvp:[{dummy:0},
+{name:'RX',f:1,type:4,id:1470,tb:'0',h:'0',m:'0',hp:'00.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],parent:'1469'}],crx:[{dummy:0}]},
+g1659:[{dummy:0},
+{name:'UartTxCovergroup',f:1,type:1,id:1664,tb:'1',h:'0',m:'1',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],opts:[[],['merge_instance','true']],parent:'1659'}],
+c1664:{name:'UartTxCovergroup',type:1,pHash:'1659',pPath:'work.UartTxPkg::UartTxCoverage',totals:[1,0,'0.00%','R',0,0,'0.00%','R'],cvp:[{dummy:0},
+{name:'TX',f:1,type:4,id:1665,tb:'0',h:'0',m:'0',hp:'00.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],parent:'1664'},
+{name:'PR',f:1,type:4,id:1666,tb:'1',h:'0',m:'1',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],hasb:1,parent:'1664'}],crx:[{dummy:0}]},
+dummyEnd:0
+};
+processCovergroupsData(g_data);
