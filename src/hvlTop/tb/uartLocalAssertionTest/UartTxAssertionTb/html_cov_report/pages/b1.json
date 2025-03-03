@@ -1,0 +1,38 @@
+var g_data = {
+b7:[{dummy:0},
+{anchor:'cvg14',items:[{z:'    if(!(uartStartDetectInitiation))begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'20',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'    if(!(uartStartDetectInitiation))begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'20',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'    if(!(uartStartDetectInitiation))begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'20',h:'2',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'      if(localWidth == DATA_WIDTH)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'24',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'      if(localWidth == DATA_WIDTH)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'24',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'      if(localWidth == DATA_WIDTH)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'24',h:'5',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'        if(uartParityEnabled == 1)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'25',c:'Y',p:'50.00'}
+,{cr:'m',t:'I',z:'        if(uartParityEnabled == 1)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'25',h:'0',c:'r'}
+,{cr:'c',t:'E',z:'        else begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'38',h:'1',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'          if(uartEvenOddParity == EVEN_PARITY)begin',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'26',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'          if(uartEvenOddParity == EVEN_PARITY)begin',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'26',h:'0',c:'r'}
+,{cr:'m',t:'E',z:'          else begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'30',h:'0',c:'r'}
+]}],
+b13:[{dummy:0},
+{anchor:'cvg14',items:[{z:'    if(!(uartStartDetectInitiation))begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'20',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'    if(!(uartStartDetectInitiation))begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'20',h:'6',c:'g'}
+,{cr:'c',t:'A',z:'    if(!(uartStartDetectInitiation))begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'20',h:'2',c:'g'}
+]},
+{anchor:'cvg15',items:[{z:'      if(localWidth == DATA_WIDTH)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'24',c:'G',p:'100.00'}
+,{cr:'c',t:'I',z:'      if(localWidth == DATA_WIDTH)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'24',h:'1',c:'g'}
+,{cr:'c',t:'A',z:'      if(localWidth == DATA_WIDTH)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'24',h:'5',c:'g'}
+]},
+{anchor:'cvg16',items:[{z:'        if(uartParityEnabled == 1)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'25',c:'Y',p:'50.00'}
+,{cr:'m',t:'I',z:'        if(uartParityEnabled == 1)begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'25',h:'0',c:'r'}
+,{cr:'c',t:'E',z:'        else begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'38',h:'1',c:'g'}
+]},
+{anchor:'cvg17',items:[{z:'          if(uartEvenOddParity == EVEN_PARITY)begin',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'26',c:'R',p:'0.00'}
+,{cr:'m',t:'I',z:'          if(uartEvenOddParity == EVEN_PARITY)begin',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'26',h:'0',c:'r'}
+,{cr:'m',t:'E',z:'          else begin ',f:'/home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv',l:'30',h:'0',c:'r'}
+]}],
+dummyEnd:0
+};
+processBranchesData(g_data);

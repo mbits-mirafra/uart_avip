@@ -1,0 +1,22 @@
+var g_data = {
+a7:{
+scopes:[{link:'z.htm?f=0&s=7',val:'work.UartTxAssertions'}]
+,assertions:[{dummy:0},{cr:'c',c:'g',z:'IF_THERE_IS_FALLINGEDGE_ASSERTION_PASS',fc:'Gr',pc:'Gr',h0:'0',h1:'1',h2:'8',h3:'1',h4:'6',h5:'0',h6:'1'}
+,{cr:'c',c:'g',z:'CHECK_FOR_DATA_WIDTH_LENGTH',fc:'Gr',pc:'Gr',h0:'0',h1:'1',h2:'8',h3:'0',h4:'7',h5:'0',h6:'2'}
+,{cr:'m',c:'Z',z:'CHECK_FOR_EVEN_PROPERTY',fc:'Gr',pc:'Rr',h0:'0',h1:'0',h2:'8',h3:'0',h4:'8',h5:'0',h6:'0'}
+,{cr:'m',c:'Z',z:'CHECK_FOR_ODD_PROPERTY',fc:'Gr',pc:'Rr',h0:'0',h1:'0',h2:'8',h3:'0',h4:'8',h5:'0',h6:'0'}
+,{cr:'c',c:'g',z:'CHECK_FOR_STOP_BIT',fc:'Gr',pc:'Gr',h0:'0',h1:'1',h2:'8',h3:'0',h4:'7',h5:'0',h6:'2'}
+],
+},
+a13:{
+scopes:[{s:'9',b:'1',val:'UartTxAssertionTb'},{link:'z.htm?f=0&s=13',val:'uartTxAssertions'}]
+,assertions:[{dummy:0},{cr:'c',c:'g',z:'IF_THERE_IS_FALLINGEDGE_ASSERTION_PASS',fc:'Gr',pc:'Gr',h0:'0',h1:'1',h2:'8',h3:'1',h4:'6',h5:'0',h6:'1'}
+,{cr:'c',c:'g',z:'CHECK_FOR_DATA_WIDTH_LENGTH',fc:'Gr',pc:'Gr',h0:'0',h1:'1',h2:'8',h3:'0',h4:'7',h5:'0',h6:'2'}
+,{cr:'m',c:'Z',z:'CHECK_FOR_EVEN_PROPERTY',fc:'Gr',pc:'Rr',h0:'0',h1:'0',h2:'8',h3:'0',h4:'8',h5:'0',h6:'0'}
+,{cr:'m',c:'Z',z:'CHECK_FOR_ODD_PROPERTY',fc:'Gr',pc:'Rr',h0:'0',h1:'0',h2:'8',h3:'0',h4:'8',h5:'0',h6:'0'}
+,{cr:'c',c:'g',z:'CHECK_FOR_STOP_BIT',fc:'Gr',pc:'Gr',h0:'0',h1:'1',h2:'8',h3:'0',h4:'7',h5:'0',h6:'2'}
+],
+},
+dummyEnd:0
+};
+processAssertionsData(g_data,1);
