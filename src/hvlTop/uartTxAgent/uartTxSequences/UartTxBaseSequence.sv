@@ -6,25 +6,26 @@ class UartTxBaseSequence extends uvm_sequence#(UartTxTransaction);
   
   extern function new(string name = "UartTxBaseSequence");
   extern virtual task body();
-
+  rand int packetsNeeded;
 endclass : UartTxBaseSequence
 
 function  UartTxBaseSequence :: new(string name= "UartTxBaseSequence");
   super.new(name);
+ 
 endfunction : new
 
 task UartTxBaseSequence :: body();
-  super.body();
+ // super.body();
+ 
   req = UartTxTransaction :: type_id :: create("req");
+  repeat(packetsNeeded)begin 
   start_item(req);
-  if( !(req.randomize()))
-   `uvm_fatal(get_type_name(),"Randomization failed")
-  req.print(); 
+  if(!(req.randomize()))
+   `uvm_fatal("[tx sequence]","randomization failed")
+
+  req.print();
   finish_item(req);
+  end 
 endtask : body
  
 `endif   
-
-
-
-

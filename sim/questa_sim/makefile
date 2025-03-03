@@ -61,7 +61,7 @@ usage:
 	echo "make regression testlist_name=<regression_testlist_name.list>";
 	echo "";
 	echo "Example:":
-	echo "make regression testlist_name=apb_regression.list";
+	echo "make regression testlist_name=regression_testlist_name.list";
 	echo "";
 	echo "-----------------------------------------------------------------";
 	echo "-----------------------------------------------------------------";
@@ -131,11 +131,12 @@ simulate:
 	-c -do "log -r /*; add wave -r /*; coverage save -onexit -assert -directive -cvg -codeAll $(test_folder)/$(test)_coverage.ucdb; run -all; exit" \
 	-wlf $(test_folder)/waveform.wlf
 
+	cat $(test_folder)/$(test).log >> regression_summary.log
 
 	# For checking and reporting simulation errors
 	make simulate_war_err
 
-	## TODO(mshariff): 
+	## TODO: 
 	## # For coverage report in text format 
 	## #vcover report -text $(test)/$(test)_cov
 	# -c -do "log -r /*; add wave -r /*; coverage save -onexit -assert -directive -cvg -codeAll $(test)/coverage.ucdb; coverage report -file $(teset)/coverage.txt -byfile -detail -noannotate -option -directive -cvg -details -verbose; run -all; exit" \
@@ -154,30 +155,29 @@ simulate:
 	# vsim -view waveform.wlf -do apb_waves.do &
 
 clean_simulate:
-	rm -rf *_test*
+	rm -rf Uart*
 
 clean_compile:
-	rm -rf work/ *_compile.log transcript waveform.wlf
+	rm -rf work/ *_compile.log transcript waveform.wlf work test_names_trace.txt  vsim_stacktrace.vstf  vsim.wlf
 	rm -rf merged_coverage.ucdb merged_cov_html_report
 
-#clean:
-#	make clean_compile
-#	make clean_simulate
+clean:
+	make clean_compile
+	make clean_simulate
 
 ##
 ## For Regression and coverage merge
 ##
+
+
 regression:
-	# Run compilation
-	#make compile
+	rm -f regression_summary.log  # Remove old regression log before starting
 	make clean_simulate
-	# Run simualtion - regression 
 	python regression_handling.py $(testlist_name)
-	#	# Get the tests from regression list
-	#	grep "_test" ../../src/hvl_top/testlists/apb_simple_fd_regression.list | grep -v "\#" > reg_list
-	#	make simulate test=value #Get the name from regression list
-	#	Merge coverage
 	make merge_cov_report
+
+
+
 		
 # For merge to happen, the coverage names for each test must be different
 #
@@ -208,6 +208,8 @@ compile_war_err:
 	echo "-----------------------------------------------------------------";
 	echo "-----------------------------------------------------------------";
 	echo "";
+
+
 
 simulate_war_err:
 	echo "";

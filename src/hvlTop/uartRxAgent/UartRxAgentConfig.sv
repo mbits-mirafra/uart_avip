@@ -7,18 +7,23 @@
 class UartRxAgentConfig extends uvm_object;
   `uvm_object_utils(UartRxAgentConfig)
   
-  //Variable: is_active
-  //Used to declare whether the agent is active or passive
   uvm_active_passive_enum is_active;
 
-  //Variable: has_coverage
-  //Used to set whether we need to create coverage or not
+  // config variables for rx agent
   bit hasCoverage;
-
- 
-  //Variable: has_coverage 
-  bit hasParity;
-  
+  hasParityEnum hasParity;
+  overSamplingEnum uartOverSamplingMethod;
+  baudRateEnum uartBaudRate;
+  dataTypeEnum uartDataType;
+  parityTypeEnum uartParityType;
+  stopBitEnum  uartStopBit;
+  rand int packetsNeeded;
+  bit patternNeeded;
+  logic[DATA_WIDTH-1:0]patternToTransmit;
+  bit parityErrorInjection;
+  bit OverSampledBaudFrequencyClk;
+  bit framingErrorInjection;
+  bit breakingErrorInjection;
   //-------------------------------------------------------
   // Externally defined Tasks and Functions
   //-------------------------------------------------------
@@ -28,8 +33,6 @@ endclass : UartRxAgentConfig
 
 //--------------------------------------------------------------------------------------------
 // Construct: new
-//
-// Parameters:
 //  name -  UartRxAgentConfig
 //--------------------------------------------------------------------------------------------
 function UartRxAgentConfig :: new(string name = "UartRxAgentConfig");

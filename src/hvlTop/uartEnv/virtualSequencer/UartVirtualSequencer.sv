@@ -18,8 +18,6 @@ endclass : UartVirtualSequencer
     
 //--------------------------------------------------------------------------------------------
 // Construct: new
-//
-// Parameters:
 //  name - instance name of the  virtual_sequencer
 //  parent - parent under which this component is created
 //--------------------------------------------------------------------------------------------

@@ -18,7 +18,9 @@
 ../../src/hdlTop/uartTxAgentBfm/UartTxDriverBfm.sv
 ../../src/hdlTop/uartTxAgentBfm/UartTxMonitorBfm.sv
 ../../src/hdlTop/uartTxAgentBfm/UartTxAgentBfm.sv
+../../src/hdlTop/uartTxAgentBfm/UartTxAssertions.sv
 ../../src/hdlTop/uartRxAgentBfm/UartRxDriverBfm.sv
+../../src/hdlTop/uartRxAgentBfm/UartRxAssertions.sv
 ../../src/hdlTop/uartRxAgentBfm/UartRxMonitorBfm.sv
 ../../src/hdlTop/uartRxAgentBfm/UartRxAgentBfm.sv
 ../../src/hdlTop/UartHdlTop.sv

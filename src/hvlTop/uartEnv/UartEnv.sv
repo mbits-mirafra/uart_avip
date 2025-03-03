@@ -38,8 +38,6 @@ endclass : UartEnv
 
 //--------------------------------------------------------------------------------------------
 // Construct: new
-//
-// Parameters:
 //  name - UartEnv 
 //  parent - parent under which this component is created
 //--------------------------------------------------------------------------------------------
@@ -50,8 +48,6 @@ endfunction : new
 //--------------------------------------------------------------------------------------------
 // Function: build_phase
 // Builds the Tx and Rx agents and scoreboard
-//
-// Parameters:
 //  phase - uvm phase
 //--------------------------------------------------------------------------------------------
 function void UartEnv :: build_phase(uvm_phase phase);
@@ -60,12 +56,12 @@ function void UartEnv :: build_phase(uvm_phase phase);
   if(!(uvm_config_db #(UartEnvConfig) :: get(this,"","uartEnvConfig",this.uartEnvConfig)))
     `uvm_fatal("FATAL ENV CONFIG", $sformatf("Failed to get environment config in environment"))
 
-  if(uartEnvConfig.hasvirtualsequencer) 
+  if(uartEnvConfig.hasVirtualSequencer) 
   begin 
     uartVirtualSequencer = UartVirtualSequencer :: type_id :: create("uartVirtualSequencer",this);
   end 
 
-  if(uartEnvConfig.hasscoreboard)
+  if(uartEnvConfig.hasScoreboard)
   begin 
     uartScoreboard = UartScoreboard :: type_id :: create("uartScoreboard",this);
   end 
@@ -78,7 +74,6 @@ endfunction : build_phase
 // Function: connect_phase
 //  Connects the Tx agent monitor's analysis_port with scoreboard's analysis_fifo 
 //  Connects the Rx agent monitor's analysis_port with scoreboard's analysis_fifo 
-// Parameters:
 //  phase - uvm phase
 //--------------------------------------------------------------------------------------------
 function void UartEnv ::connect_phase(uvm_phase phase);
@@ -87,7 +82,7 @@ function void UartEnv ::connect_phase(uvm_phase phase);
   uartTxAgent.uartTxAgentAnalysisPort.connect(uartScoreboard.uartScoreboardTxAnalysisExport);
   uartRxAgent.uartRxAgentAnalysisPort.connect(uartScoreboard.uartScoreboardRxAnalysisExport);
 
-  if(uartEnvConfig.hasvirtualsequencer==1)
+  if(uartEnvConfig.hasVirtualSequencer==1)
   begin 
    uartVirtualSequencer.uartTxSequencer = uartTxAgent.uartTxSequencer;
    uartVirtualSequencer.uartRxSequencer = uartRxAgent.uartRxSequencer;

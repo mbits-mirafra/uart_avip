@@ -1,0 +1,71 @@
+# vsim -vopt work.UartTxAssertionTb -voptargs="+acc=npr" -assertdebug "+UVM_TESTNAME=UartTxAssertionTb" "+UVM_VERBOSITY=UVM_MEDIUM" -l UartTxAssertionTb/UartTxAssertionTb.log -sva -coverage -c -do "log -r /*; add wave -r /*; coverage save -onexit -assert -directive -cvg -codeAll UartTxAssertionTb/UartTxAssertionTb_coverage.ucdb; run -all; exit" -wlf UartTxAssertionTb/waveform.wlf 
+# Start time: 12:26:14 on Jan 29,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# //  Questa Sim
+# //  Version 10.6c linux Jul 25 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading mtiUvm.uvm_pkg
+# Loading work.UartTxAssertionTB_sv_unit(fast)
+# Loading work.UartTxAssertionTb(fast)
+# Loading work.UartTxCoverParameter(fast)
+# Loading work.UartTxAssertions_sv_unit(fast)
+# Loading work.UartTxAssertions(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading /tools/mentor/questasim_10.6c/questasim/uvm-1.1d/linux/uvm_dpi.so
+# log -r /*
+#  add wave -r /*
+#  coverage save -onexit -assert -directive -cvg -codeAll UartTxAssertionTb/UartTxAssertionTb_coverage.ucdb
+#  run -all
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# ** Info: START BIT DETECTED : ASSERTION PASS
+#    Time: 15 ns Started: 5 ns  Scope: UartTxAssertionTb.uartTxAssertions.IF_THERE_IS_FALLINGEDGE_ASSERTION_PASS File: /home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv Line: 52
+# 00001
+# 00010
+# 00101
+# 01011
+# 10110
+# ** Info: DATA WIDTH IS MATCHING : ASSERTION PASS
+#    Time: 75 ns Started: 65 ns  Scope: UartTxAssertionTb.uartTxAssertions.CHECK_FOR_DATA_WIDTH_LENGTH File: /home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv Line: 64
+# ** Error: Odd PARITY NOT DETECTED : ASSERTION FAIL
+#    Time: 75 ns Started: 65 ns  Scope: UartTxAssertionTb.uartTxAssertions.CHECK_FOR_ODD_PROPERTY File: /home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv Line: 96 Expr: ~uartTx==^uartLocalData
+# 01101
+# ** Info: STOP BIT IS BEING DETECTED : ASSERTION PASS
+#    Time: 85 ns Started: 75 ns  Scope: UartTxAssertionTb.uartTxAssertions.CHECK_FOR_STOP_BIT File: /home/swasthikkamath/UART-AVIP/src/hvlTop/uartTxAgent/UartTxAssertions.sv Line: 105
+# ** Note: $finish    : /home/swasthikkamath/UART-AVIP/src/hvlTop/tb/uartLocalAssertionTest/UartTxAssertionTB.sv(14)
+#    Time: 100 ns  Iteration: 0  Instance: /UartTxAssertionTb
+# Saving coverage database on exit...
+# End time: 12:26:21 on Jan 29,2025, Elapsed time: 0:00:07
+# Errors: 1, Warnings: 0

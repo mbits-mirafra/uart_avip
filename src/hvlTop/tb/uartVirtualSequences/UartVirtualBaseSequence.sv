@@ -36,7 +36,7 @@ endfunction : new
 // phase - stores the current phase
 //--------------------------------------------------------------------------------------------
 task UartVirtualBaseSequence :: body();
-  super.body();
+  //super.body();
 
   if( !($cast(p_sequencer , m_sequencer)))
     `uvm_error(get_type_name(),"FAILED TO CASTE TO SEQUENCER SUBPOINTER");

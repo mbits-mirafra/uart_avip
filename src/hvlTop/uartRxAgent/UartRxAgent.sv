@@ -66,7 +66,6 @@ function void UartRxAgent :: build_phase( uvm_phase phase);
 
   if(!(uvm_config_db #(UartRxAgentConfig) :: get(this , "", "uartRxAgentConfig",uartRxAgentConfig)))
     `uvm_fatal(get_type_name(),$sformatf("FAILED TO OBTAIN AGENT CONFIG"))
-
   if(uartRxAgentConfig.is_active == UVM_ACTIVE) begin 
     uartRxDriverProxy = UartRxDriverProxy :: type_id :: create("uartRxDriverProxy",this);
     uartRxSequencer = UartRxSequencer :: type_id :: create("uartRxSequencer",this);

@@ -26,7 +26,8 @@ class UartTxAgent extends uvm_component;
   // Variable:  uartTxSequencer
   // Declaring handle for uart sequencer
   UartTxSequencer uartTxSequencer;
-
+  
+  event synchronizer;
   //Analysis port
   uvm_analysis_port #(UartTxTransaction) uartTxAgentAnalysisPort;
 
@@ -40,8 +41,7 @@ class UartTxAgent extends uvm_component;
 endclass : UartTxAgent
 
 //--------------------------------------------------------------------------------------------
-// Construct: new
-//
+// Constructor: new
 // Parameters: 
 // name - instance name of the UartTxAgent
 // parent - parent under which this component is created
@@ -53,8 +53,6 @@ endfunction  : new
 //--------------------------------------------------------------------------------------------
 // Function: build_phase
 // creates the required ports,gets the required configuration from config_db
-//
-// Parameters:
 // phase - uvm phase
 //--------------------------------------------------------------------------------------------
 function void UartTxAgent :: build_phase( uvm_phase phase);
@@ -64,23 +62,22 @@ function void UartTxAgent :: build_phase( uvm_phase phase);
     `uvm_fatal(get_type_name(),$sformatf("FAILED TO OBTAIN AGENT CONFIG"))
 
   uartTxMonitorProxy = UartTxMonitorProxy :: type_id :: create("uartTxMonitorProxy",this);
+  uartTxMonitorProxy.monitorSynchronizer = synchronizer;
   if(uartTxAgentConfig.is_active == UVM_ACTIVE)
     begin 
       uartTxDriverProxy = UartTxDriverProxy :: type_id :: create("uartTxDriverProxy",this);
       uartTxSequencer = UartTxSequencer :: type_id :: create("uartTxSequencer",this);
+      uartTxDriverProxy.driverSynchronizer = synchronizer;
     end 
   
   if(uartTxAgentConfig.hasCoverage == 1)
     uartTxCoverage = UartTxCoverage :: type_id :: create("uartTxCoverage",this);
-  
-  uartTxAgentAnalysisPort = new("uartTxAgentAnalysisPort",this);
+  	uartTxAgentAnalysisPort = new("uartTxAgentAnalysisPort",this);
 endfunction : build_phase
 
 //--------------------------------------------------------------------------------------------
 // Function: connect_phase
 // Connecting device0_driver, device0_monitor and device0_sequencer for configuration
-//
-// Parameters:
 // phase - uvm phase
 //--------------------------------------------------------------------------------------------
 function void UartTxAgent :: connect_phase( uvm_phase phase);
@@ -97,4 +94,3 @@ function void UartTxAgent :: connect_phase( uvm_phase phase);
 endfunction : connect_phase
 
 `endif
-

@@ -10,10 +10,9 @@ class UartBaseTest extends uvm_test;
  
   `uvm_component_utils(UartBaseTest)
  
-  UartVirtualBaseSequence uartVirtualBaseSequence;
+  UartVirtualTransmissionSequence uartVirtualTransmissionSequence;
   UartEnvConfig           uartEnvConfig;
   UartEnv                 uartEnv;
- 
   //-------------------------------------------------------
   // Externally defined Tasks and Functions
   //-------------------------------------------------------
@@ -31,7 +30,7 @@ endclass : UartBaseTest
 // Constructor:new
 //
 // Paramters:
-// name - Instance name of the virtual_sequence
+//
 // parent - parent under which this component is created
 //--------------------------------------------------------------------------------------------
 function UartBaseTest :: new(string name = "UartBaseTest" , uvm_component parent = null);
@@ -58,8 +57,8 @@ endfunction  : build_phase
 //--------------------------------------------------------------------------------------------
  function void UartBaseTest :: setupUartEnvConfig();
   uartEnvConfig = UartEnvConfig :: type_id :: create("uartEnvConfig");
-  uartEnvConfig.hasscoreboard = 1;
-  uartEnvConfig.hasvirtualsequencer = 1;
+  uartEnvConfig.hasScoreboard = 1;
+  uartEnvConfig.hasVirtualSequencer = 1;
   uvm_config_db #(UartEnvConfig) :: set(this,"*", "uartEnvConfig",uartEnvConfig);
   setupUartTxAgentConfig();
   setupUartRxAgentConfig();
@@ -71,11 +70,24 @@ endfunction : setupUartEnvConfig
 // and store the handle into the config_db
 //--------------------------------------------------------------------------------------------
  function void UartBaseTest :: setupUartTxAgentConfig();
+   
   uartEnvConfig.uartTxAgentConfig = UartTxAgentConfig :: type_id :: create("uartTxAgentConfig");
+  uartEnvConfig.uartTxAgentConfig.packetsNeeded=NO_OF_PACKETS;
   uartEnvConfig.uartTxAgentConfig.is_active = UVM_ACTIVE;
   uartEnvConfig.uartTxAgentConfig.hasCoverage = 1;
-  uartEnvConfig.uartTxAgentConfig.hasParity = 1;
-  uvm_config_db #(UartTxAgentConfig) :: set(this,"*", "uartTxAgentConfig",uartEnvConfig.uartTxAgentConfig);
+  uartEnvConfig.uartTxAgentConfig.hasParity = PARITY_ENABLED;
+  uartEnvConfig.uartTxAgentConfig.uartOverSamplingMethod = OVERSAMPLING_16;
+  uartEnvConfig.uartTxAgentConfig.uartBaudRate = BAUD_9600;
+  uartEnvConfig.uartTxAgentConfig.uartDataType = FIVE_BIT;
+  uartEnvConfig.uartTxAgentConfig.uartParityType = EVEN_PARITY;
+  uartEnvConfig.uartTxAgentConfig.parityErrorInjection = 0;
+  uartEnvConfig.uartTxAgentConfig.framingErrorInjection = 0;
+  uartEnvConfig.uartTxAgentConfig.patternNeeded = 0;
+  uartEnvConfig.uartTxAgentConfig.patternToTransmit=10101010;
+  uartEnvConfig.uartTxAgentConfig.breakingErrorInjection = 0;
+
+  uartEnvConfig.uartTxAgentConfig.OverSampledBaudFrequencyClk =1;
+  uvm_config_db #(UartTxAgentConfig) :: set(null,"*", "uartTxAgentConfig",uartEnvConfig.uartTxAgentConfig);
 
 endfunction : setupUartTxAgentConfig
    
@@ -86,10 +98,20 @@ endfunction : setupUartTxAgentConfig
 //--------------------------------------------------------------------------------------------
  function void UartBaseTest :: setupUartRxAgentConfig();
   uartEnvConfig.uartRxAgentConfig = UartRxAgentConfig :: type_id :: create("uartRxAgentConfig");
+  uartEnvConfig.uartRxAgentConfig.packetsNeeded=NO_OF_PACKETS;
   uartEnvConfig.uartRxAgentConfig.is_active = UVM_PASSIVE;
   uartEnvConfig.uartRxAgentConfig.hasCoverage = 1;
-  uartEnvConfig.uartRxAgentConfig.hasParity = 1;
-  uvm_config_db#(UartRxAgentConfig) :: set(this, "*" , "uartRxAgentConfig", uartEnvConfig.uartRxAgentConfig);
+  uartEnvConfig.uartRxAgentConfig.hasParity = PARITY_ENABLED;
+  uartEnvConfig.uartRxAgentConfig.uartOverSamplingMethod = OVERSAMPLING_16;
+  uartEnvConfig.uartRxAgentConfig.uartBaudRate = BAUD_9600;
+  uartEnvConfig.uartRxAgentConfig.uartDataType = FIVE_BIT;
+  uartEnvConfig.uartRxAgentConfig.uartParityType = EVEN_PARITY;
+  uartEnvConfig.uartRxAgentConfig.parityErrorInjection =0;
+  uartEnvConfig.uartRxAgentConfig.framingErrorInjection = 0;
+  uartEnvConfig.uartRxAgentConfig.OverSampledBaudFrequencyClk =1;
+  uartEnvConfig.uartRxAgentConfig.patternNeeded = 0;
+  uartEnvConfig.uartRxAgentConfig.patternToTransmit=10101010;
+  uvm_config_db #(UartRxAgentConfig) :: set(null,"*", "uartRxAgentConfig",uartEnvConfig.uartRxAgentConfig);
 
 endfunction : setupUartRxAgentConfig
    
@@ -113,12 +135,13 @@ endfunction : end_of_elaboration_phase
 // phase - stores the current phase
 //--------------------------------------------------------------------------------------------
  task UartBaseTest :: run_phase(uvm_phase phase);
-  uartVirtualBaseSequence = UartVirtualBaseSequence :: type_id :: create("uartVirtualBaseSequence");
+  uartVirtualTransmissionSequence = UartVirtualTransmissionSequence :: type_id :: create("uartVirtualTransmissionSequence");
+  uartVirtualTransmissionSequence.print();
   phase.raise_objection(this);
-   uartVirtualBaseSequence.start(uartEnv.uartVirtualSequencer);
+  uartVirtualTransmissionSequence.start(uartEnv.uartVirtualSequencer);
+  #100000;
   phase.drop_objection(this);
 endtask : run_phase
 
 `endif  
 
-  

@@ -23,6 +23,7 @@ package UartVirtualSequencePkg;
 
   `include "UartVirtualBaseSequence.sv"
   `include "UartVirtualTransmissionSequence.sv"
+  `include "UartVirtualTransmissionSequenceWithPattern.sv"
 endpackage
 
 `endif

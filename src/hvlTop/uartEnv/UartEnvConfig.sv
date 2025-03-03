@@ -8,13 +8,13 @@
 class UartEnvConfig extends uvm_object;
   `uvm_object_utils(UartEnvConfig)
 
-  //Variable: hasvirtualsequencer
+  //Variable: hasVirtualSequencer
   //Enables the virtual sequencer
-  bit hasvirtualsequencer;
+  bit hasVirtualSequencer;
 
-  //Variable: hasscoreboard
+  //Variable: hasScoreboard
   //Enables the scoreboard
-  bit hasscoreboard;
+  bit hasScoreboard;
 
   //Variable: uartTxAgentConfig;
   //Handle for Tx configuration
@@ -34,8 +34,6 @@ class UartEnvConfig extends uvm_object;
 //--------------------------------------------------------------------------------------------
 // Construct: new
 //  Initialization of new memory
-//
-// Parameters:
 //  name - UartEnvConfig
 //--------------------------------------------------------------------------------------------
  function UartEnvConfig :: new(string name = "UartEnvConfig");

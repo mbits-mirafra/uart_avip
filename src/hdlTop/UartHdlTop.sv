@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------------------------------
 // Module      : HDLTop
 //--------------------------------------------------------------------------------------------
-
+`timescale 1ns/1ps
 module HdlTop;
 
   //-------------------------------------------------------
@@ -19,10 +19,6 @@ module HdlTop;
   //Declaration of system clock
 
   bit clk;
-  
-  //Variables : on,off
-  //used for generating clock of required frequency
-  real on,off;
 
   //Variable : reset
   //Declaration of system reset
@@ -34,12 +30,9 @@ module HdlTop;
   //-------------------------------------------------------
 
   initial begin
-    on= PERIOD*(DUTY*0.01);
-    off = PERIOD-on;
+     clk=0;
     forever begin
-      clk=1;
-      #on clk=0;
-      #off;
+     #0.1 clk = ~clk;
     end
   end
 
@@ -49,7 +42,7 @@ module HdlTop;
 
   initial begin
     reset = 1'b1;
-    #15 reset = 1'b0;
+    #1 reset = 1'b0;
 
     repeat(1) begin
       @(posedge clk);
@@ -73,5 +66,7 @@ module HdlTop;
   //-------------------------------------------------------
 
   UartRxAgentBfm uartRxAgentBfm(uartIf);
+
+  //assign uartIf.rx = uartIf.tx;
   
 endmodule : HdlTop

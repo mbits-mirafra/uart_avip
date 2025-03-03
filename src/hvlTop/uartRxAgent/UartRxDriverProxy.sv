@@ -56,7 +56,7 @@ endfunction : build_phase
 task UartRxDriverProxy :: run_phase(uvm_phase phase);
   UartRxPacketStruct uartRxPacketStruct;
   seq_item_port.get_next_item(req);
-  UartRxSeqItemConverter :: fromRxClass(req,uartRxPacketStruct);
+  // UartRxSeqItemConverter :: fromRxClass(req,uartRxPacketStruct);
   `uvm_info("BFM",$sformatf("data in driver is %p",uartRxPacketStruct.receivingData),UVM_LOW)
   seq_item_port.item_done();
 endtask : run_phase

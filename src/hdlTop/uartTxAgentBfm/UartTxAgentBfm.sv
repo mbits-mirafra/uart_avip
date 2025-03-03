@@ -13,7 +13,7 @@ module UartTxAgentBfm(UartIf uartIf);
   `include "uvm_macros.svh"
   
   initial begin
-    `uvm_info("uart transmitter agent bfm",$sformatf("UART TRANSMITTER AGENT BFM"),UVM_LOW);
+    `uvm_info("uart transmitter agent bfm",$sformatf("UART TRANSMITTER AGENT BFM"),UVM_LOW)
   end
   
   //-------------------------------------------------------
@@ -44,5 +44,7 @@ module UartTxAgentBfm(UartIf uartIf);
     uvm_config_db#(virtual UartTxDriverBfm)::set(null,"*","uartTxDriverBfm",uartTxDriverBfm);
     uvm_config_db#(virtual UartTxMonitorBfm)::set(null,"*","uartTxMonitorBfm",uartTxMonitorBfm);
   end
+
+  bind UartTxMonitorBfm UartTxAssertions TransmissionAssertions(.uartClk(baudClk),.uartTx(tx));
 
 endmodule : UartTxAgentBfm
