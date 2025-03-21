@@ -75,15 +75,21 @@ task UartRxMonitorProxy :: run_phase(uvm_phase phase);
   	uartRxMonitorBfm.WaitForReset();
   	forever begin
 	    UartRxTransaction uartRxTransaction_clone;
-	    UartRxSeqItemConverter :: fromRxClass(uartRxTransaction,uartRxAgentConfig,uartRxPacketStruct);
-	    UartRxConfigConverter::from_Class(uartRxAgentConfig , uartConfigStruct);
+	    uartRxPacketStruct.receivingData='b x;
+	    uartRxTransaction.receivingData = 'b x;
+	    uartRxPacketStruct.breakingError= 'b 0;
+	    uartRxPacketStruct.framingError= 'b 0;
+	    uartRxPacketStruct.parityError= 'b 0;
+
+	    UartRxConfigConverter :: from_Class(uartRxAgentConfig , uartConfigStruct);
+	    uvm_config_db #(UartConfigStruct) :: set(null,"*","uartConfigStruct",uartConfigStruct);
 	    uartRxMonitorBfm.StartMonitoring(uartRxPacketStruct, uartConfigStruct);
-	    UartRxSeqItemConverter::toRxClass(uartRxPacketStruct,uartRxAgentConfig,uartRxTransaction);
-	
-			$write("Data received : ");
-			for(int i=0;i<uartRxAgentConfig.uartDataType;i++)
-				$write("%b",uartRxTransaction.receivingData[i]);
-   		$display(" ");
+	    
+	    UartRxSeqItemConverter::toRxClass(uartRxPacketStruct,uartConfigStruct,uartRxTransaction);
+                     $write("THE PACKET RECEIVED BY THE RECEIVER PROXY IS:");
+			for(int i=0;i<uartConfigStruct.uartDataType;i++)
+				$write("%b",uartRxPacketStruct.receivingData[i]);
+   		$display("\n");
 	    $cast(uartRxTransaction_clone, uartRxTransaction.clone());  
 	    uartRxMonitorAnalysisPort.write(uartRxTransaction_clone);
   end

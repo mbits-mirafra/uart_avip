@@ -13,8 +13,8 @@ class UartRxSeqItemConverter extends uvm_object;
   // Externally defined Tasks and Functions
   //-------------------------------------------------------
   extern function new( string name = "UartRxSeqItemConverter");
-  extern static function void fromRxClass(input UartRxTransaction uartRxTransaction, input UartRxAgentConfig uartRxAgentConfig, output UartRxPacketStruct uartRxPacketStruct);
-  extern static function void toRxClass(input UartRxPacketStruct uartRxPacketStruct, input UartRxAgentConfig uartRxAgentConfig, inout UartRxTransaction uartRxTransaction);
+  extern static function void fromRxClass(input UartRxTransaction uartRxTransaction, input UartConfigStruct uartConfigStruct, output UartRxPacketStruct uartRxPacketStruct);
+  extern static function void toRxClass(input UartRxPacketStruct uartRxPacketStruct, input UartConfigStruct uartConfigStruct, inout UartRxTransaction uartRxTransaction);
     
 endclass :UartRxSeqItemConverter
     
@@ -31,8 +31,8 @@ endfunction : new
 // Converting seq_item transactions into struct data items
 // name -UartRxTransaction, UartRxPacketStruct 
 //--------------------------------------------------------------------------------------------
-function void UartRxSeqItemConverter :: fromRxClass(input UartRxTransaction uartRxTransaction,input UartRxAgentConfig uartRxAgentConfig, output UartRxPacketStruct uartRxPacketStruct);
-    for( int i=0 ; i< uartRxAgentConfig.uartDataType ; i++) begin  
+function void UartRxSeqItemConverter :: fromRxClass(input UartRxTransaction uartRxTransaction,input UartConfigStruct uartConfigStruct, output UartRxPacketStruct uartRxPacketStruct);
+    for( int i=0 ; i< uartConfigStruct.uartDataType ; i++) begin  
       uartRxPacketStruct.receivingData[i] = uartRxTransaction.receivingData[i];
     end
 endfunction : fromRxClass
@@ -42,10 +42,11 @@ endfunction : fromRxClass
 //  Converting struct data items into seq_item transactions
 //  name - UartRxPacketStruct,UartRxTransaction 
 //--------------------------------------------------------------------------------------------
-function void UartRxSeqItemConverter :: toRxClass(input UartRxPacketStruct uartRxPacketStruct,input UartRxAgentConfig uartRxAgentConfig,inout UartRxTransaction uartRxTransaction);
-    for( int i=0 ; i<uartRxAgentConfig.uartDataType ; i++) begin
+function void UartRxSeqItemConverter :: toRxClass(input UartRxPacketStruct uartRxPacketStruct,input UartConfigStruct uartConfigStruct,inout UartRxTransaction uartRxTransaction);
+    for( int i=0 ; i<uartConfigStruct.uartDataType ; i++) begin
       uartRxTransaction.receivingData[i] = uartRxPacketStruct.receivingData[i];
     end
+
     uartRxTransaction.parity = uartRxPacketStruct.parity;
     uartRxTransaction.framingError = uartRxPacketStruct.framingError;
     uartRxTransaction.parityError = uartRxPacketStruct.parityError;

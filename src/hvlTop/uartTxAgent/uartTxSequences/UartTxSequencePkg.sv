@@ -9,7 +9,8 @@ package UartTxSequencePkg;
 
   `include"UartTxBaseSequence.sv"
   `include"UartTxBaseSequenceWithPattern.sv"
- 
+  `include "UartTxTransmitterSequence.sv"
+
 endpackage
 `endif
 

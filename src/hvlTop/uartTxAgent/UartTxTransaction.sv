@@ -9,7 +9,7 @@ class UartTxTransaction extends uvm_sequence_item;
    
    //input signals
 	rand logic [DATA_WIDTH-1 : 0] transmissionData;
-  logic  parity;
+        logic  parity;
 	logic parityError; 
 	logic breakingError; 
 	logic overrunError;
@@ -51,8 +51,8 @@ function void UartTxTransaction :: do_copy(uvm_object rhs);
   this.parity = rhs1.parity;
   this.framingError =rhs1.framingError;
   this.parityError = rhs1.parityError;
-	this.breakingError = rhs1.breakingError;
-	this.overrunError = rhs1.overrunError;
+  this.breakingError = rhs1.breakingError;
+  this.overrunError = rhs1.overrunError;
 endfunction : do_copy
 
 //--------------------------------------------------------------------------------------------

@@ -72,17 +72,21 @@ task UartTxDriverProxy :: run_phase(uvm_phase phase);
 			begin 
 				uartTxDriverBfm.WaitForReset();
 				forever begin
-					seq_item_port.get_next_item(req);
-					UartTxConfigConverter::from_Class(uartTxAgentConfig , uartConfigStruct);
-					`uvm_info("[DRIVER PROXY]",$sformatf("UartDataType = %s \nThe baudrate of Uart = %s \nThe parity enable = %s \n No. of stop bits = %s\n oversampling method = %s",
-					uartTxAgentConfig.uartDataType, uartTxAgentConfig.uartBaudRate, uartTxAgentConfig.hasParity, uartTxAgentConfig.uartStopBit, uartTxAgentConfig.uartOverSamplingMethod),UVM_LOW);
-					$write("Data to be sent : ");
-  				for(int i=0;i<uartTxAgentConfig.uartDataType;i++)
-   					$write("%b",req.transmissionData[i]);
-   				$display(" ");
-					UartTxSeqItemConverter :: fromTxClass(req,uartTxAgentConfig,uartTxPacketStruct);
+				 
+				 UartTxConfigConverter::from_Class(uartTxAgentConfig , uartConfigStruct);
+                                uvm_config_db#(UartConfigStruct) :: set(null,"*","uartConfigStruct",uartConfigStruct);
+				seq_item_port.get_next_item(req);
+				//	 UartTxConfigConverter::from_Class(uartTxAgentConfig , uartConfigStruct);
+
+`uvm_info("[DRIVER PROXY]",$sformatf("\n**************************************************************************************************************************************\n************************************************************\tTHE TRANSMITTER CONFIG FIELDS\t****************************************\n\tUartDataType = %s \n\tThe baudrate of Uart = %s \n\tThe parity enable = %s \n \tParity Type is %s\n \tNo. of stop bits = %s\n\tOversampling method = %s\n\tframing error injection = %b\n\tParity error injection = %b\n\tBreaking error injection = %b\n\*********************************************************************************************************************************",uartConfigStruct.uartDataType, uartConfigStruct.uartBaudRate, uartConfigStruct.uartParityEnable, uartConfigStruct.uartParityType, uartConfigStruct.uartStopBit,uartConfigStruct.uartOverSamplingMethod,uartConfigStruct.uartFramingErrorInjection,uartConfigStruct.uartParityErrorInjection,uartConfigStruct.uartBreakingErrorInjection),UVM_LOW);
+				  $display("The orginal data being generated is %b\n",req.transmissionData);	
+			          UartTxSeqItemConverter :: fromTxClass(req,uartConfigStruct,uartTxPacketStruct);
+					$write("Data to be sent from the Transmitter is: ");
+  				      for(int i=uartConfigStruct.uartDataType-1;i>=0;i--)
+   					$write("%b",uartTxPacketStruct.transmissionData[i]);
+					$write(" as uartDataType is %s",uartConfigStruct.uartDataType);
+   				$display(" \n");
 					uartTxDriverBfm.DriveToBfm(uartTxPacketStruct , uartConfigStruct);
-				 	//wait(driverSynchronizer.triggered);
 					seq_item_port.item_done();
 				end
 			end 

@@ -12,8 +12,8 @@ class UartTxSeqItemConverter extends uvm_object;
   // Externally defined Tasks and Functions
   //-------------------------------------------------------
   extern function new( string name = "UartTxSeqItemConverter");
-  extern static function void fromTxClass(input UartTxTransaction uartTxTransaction, input UartTxAgentConfig, output UartTxPacketStruct uartTxPacketStruct);
-  extern static function void toTxClass(input UartTxPacketStruct uartTxPacketStruct,input UartTxAgentConfig uartTxAgentConfig,inout UartTxTransaction uartTxTransaction);
+  extern static function void fromTxClass(input UartTxTransaction uartTxTransaction, input UartConfigStruct uartConfigStruct, output UartTxPacketStruct uartTxPacketStruct);
+  extern static function void toTxClass(input UartTxPacketStruct uartTxPacketStruct,input UartConfigStruct uartConfigStruct,inout UartTxTransaction uartTxTransaction);
 endclass :UartTxSeqItemConverter
     
 //--------------------------------------------------------------------------------------------
@@ -30,18 +30,18 @@ endfunction : new
 // Function: fromTxclass
 // Converting seq_item transactions into struct data items
 //--------------------------------------------------------------------------------------------
-function void UartTxSeqItemConverter :: fromTxClass(input UartTxTransaction uartTxTransaction,input UartTxAgentConfig uartTxAgentConfig, output UartTxPacketStruct uartTxPacketStruct);
-    for( int i=0 ; i< uartTxAgentConfig.uartDataType ; i++) begin  
+function void UartTxSeqItemConverter :: fromTxClass(input UartTxTransaction uartTxTransaction,input UartConfigStruct uartConfigStruct,     output UartTxPacketStruct uartTxPacketStruct);
+    for( int i=0 ; i< uartConfigStruct.uartDataType ; i++) begin  
       uartTxPacketStruct.transmissionData[i] = uartTxTransaction.transmissionData[i];
-    end 
+    end
 endfunction : fromTxClass
 
 //--------------------------------------------------------------------------------------------
 // Function: toTxClass
 // Converting struct data items into seq_item transactions
 //--------------------------------------------------------------------------------------------
-function void UartTxSeqItemConverter :: toTxClass(input UartTxPacketStruct uartTxPacketStruct,input UartTxAgentConfig uartTxAgentConfig,inout UartTxTransaction uartTxTransaction);
-    for( int i=0 ; i<uartTxAgentConfig.uartDataType ; i++) begin
+function void UartTxSeqItemConverter :: toTxClass(input UartTxPacketStruct uartTxPacketStruct,input UartConfigStruct uartConfigStruct,inout UartTxTransaction uartTxTransaction);
+    for( int i=0 ; i<uartConfigStruct.uartDataType ; i++) begin
       uartTxTransaction.transmissionData[i] = uartTxPacketStruct.transmissionData[i];
     end
     uartTxTransaction.parity = uartTxPacketStruct.parity;

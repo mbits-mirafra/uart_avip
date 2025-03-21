@@ -61,6 +61,39 @@ class UartRxCoverage extends uvm_subscriber #(UartRxTransaction);
       bins WITH_NO_ERROR = {0};
       bins WITH_ERROR = {1};
     }
+
+    DATA_PATTERN_8 : coverpoint data{
+      bins pattern1_8 = {8'b 11111111};
+      bins pattern2_8 = {8'b 10101010};
+      bins pattern3_8 = {8'b 11110000};
+      bins pattern4_8 = {8'b 00000000};
+      bins pattern5_8 = {8'b 01010101};}
+ 
+DATA_PATTERN_7 : coverpoint data{
+  bins pattern1_7 = {7'b 1111111};
+  bins pattern2_7 = {7'b 1010101};
+  bins pattern3_7 = {7'b 1111000};
+  bins pattern4_7 = {7'b 0000000};
+  bins pattern5_7 = {7'b 0101010};}
+ 
+DATA_PATTERN_6 : coverpoint data{
+  bins pattern1_6 = {6'b 111111};
+  bins pattern2_6 = {6'b 101010};
+  bins pattern3_6 = {6'b 111100};
+  bins pattern4_6 = {6'b 000000};
+  bins pattern5_6 = {6'b 010101};}
+ 
+DATA_PATTERN_5 : coverpoint data{
+  bins pattern1_5 = {5'b 11111};
+  bins pattern2_5 = {5'b 10101};
+  bins pattern3_5 = {5'b 11110};
+  bins pattern4_5 = {5'b 00000};
+  bins pattern5_5 = {5'b 01010};}
+ 
+DATA_PATTERN_5_DATA_WIDTH_CP : cross DATA_PATTERN_5,DATA_WIDTH_CP {ignore_bins data_5 = !binsof(DATA_WIDTH_CP) intersect {FIVE_BIT};}
+DATA_PATTERN_6_DATA_WIDTH_CP : cross DATA_PATTERN_6,DATA_WIDTH_CP {ignore_bins data_6 = !binsof(DATA_WIDTH_CP) intersect {SIX_BIT};}
+DATA_PATTERN_7_DATA_WIDTH_CP : cross DATA_PATTERN_7,DATA_WIDTH_CP {ignore_bins data_7 = !binsof(DATA_WIDTH_CP) intersect {SEVEN_BIT};}
+DATA_PATTERN_8_DATA_WIDTH_CP : cross DATA_PATTERN_8,DATA_WIDTH_CP {ignore_bins data_8 = !binsof(DATA_WIDTH_CP) intersect {EIGHT_BIT};}
     
     DATA_WIDTH_CP_PARITY_CP : cross DATA_WIDTH_CP,PARITY_CP;
     DATA_WIDTH_CP_STOP_BIT_CP :cross DATA_WIDTH_CP,STOP_BIT_CP;
@@ -106,10 +139,9 @@ endclass : UartRxCoverage
   //  t - UartRxTransaction handle
   //-------------------------------------------------------
   function void UartRxCoverage::write(UartRxTransaction t);
-    foreach(t.receivingData[i]) begin
-      data =  t.receivingData[i];
+      data =0;
+      data =  t.receivingData;
       UartRxCovergroup.sample(uartRxAgentConfig,data);
-    end
   endfunction : write
 
   //--------------------------------------------------------------------------------------------

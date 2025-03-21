@@ -31,7 +31,7 @@ module UartRxAgentBfm(UartIf uartIf);
   
  UartRxMonitorBfm uartRxMonitorBfm (.clk(uartIf.clk),
                                     .reset(uartIf.reset),
-                                    .rx(uartIf.tx)
+                                    .rx(uartIf.rx)
   );
 
 

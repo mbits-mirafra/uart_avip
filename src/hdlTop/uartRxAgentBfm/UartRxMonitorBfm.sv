@@ -14,7 +14,7 @@
   import uvm_pkg::*;
   `include "uvm_macros.svh"
 	
-  string name = "UART_TRANSMITTER_MONITOR_BFM";
+  string name = "UART_RECEIVER_MONITOR_BFM";
 	
   //Variable: bclk
   //baud clock for uart transmisson/reception

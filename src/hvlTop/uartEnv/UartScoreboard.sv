@@ -162,7 +162,7 @@ task UartScoreboard :: compareTxRx(UartTxTransaction uartTxTransaction,UartRxTra
              end
            end
 
-           if((uartTxAgentConfig.hasParity && uartRxAgentConfig.hasParity) == 1)
+	         if((uartTxAgentConfig.hasParity && uartRxAgentConfig.hasParity) && (uartTxAgentConfig.parityErrorInjection && uartRxAgentConfig.parityErrorInjection) == 0)
              begin
               if(uartTxTransaction.parity ^ uartRxTransaction.parity)
                  begin
@@ -212,7 +212,7 @@ task UartScoreboard :: compareTxRx(UartTxTransaction uartTxTransaction,UartRxTra
                            transmissionData: uartTxTransaction.transmissionData,
                            receivingData: uartRxTransaction.receivingData,
                            match: packetMatch,
-                           parity: uartTxTransaction.parity ^ uartRxTransaction.parity,
+                           parity:(uartTxAgentConfig.hasParity && uartRxAgentConfig.hasParity) ? (uartTxTransaction.parity ^ uartRxTransaction.parity) : 1'b0,
                            parityError: uartTxTransaction.parityError ^ uartRxTransaction.parityError,
                            breakingError: uartTxTransaction.breakingError ^ uartRxTransaction.breakingError,
                            framingError: uartTxTransaction.framingError ^ uartRxTransaction.framingError,

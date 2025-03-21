@@ -109,7 +109,7 @@ interface UartTxDriverBfm (input  logic   clk,
 	  @(negedge reset);
 	  `uvm_info(name,$sformatf("RESET DETECTED"),UVM_LOW);
 	  uartTransmitterState = RESET;
-	  tx = 1; //DRIVE THE UART TO IDEAL STATE
+	  tx = 'b x; //DRIVE THE UART TO IDEAL STATE
 	  @(posedge reset);
 	  uartTransmitterState = IDLE;
 	  `uvm_info(name,$sformatf("RESET DEASSERTED"),UVM_LOW);

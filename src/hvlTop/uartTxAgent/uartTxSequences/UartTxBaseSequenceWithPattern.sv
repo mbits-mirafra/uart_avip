@@ -1,7 +1,7 @@
 `ifndef UARTTXBASESEQUENCEWITHPATTERN_INCLUDED_
 `define UARTTXBASESEQUENCEWITHPATTERN_INCLUDED_
 
-class UartTxBaseSequenceWithPattern extends uvm_sequence#(UartTxTransaction);
+class UartTxBaseSequenceWithPattern extends UartTxBaseSequence;
   `uvm_object_utils(UartTxBaseSequenceWithPattern)
   
   extern function new(string name = "UartTxBaseSequenceWithPattern");
@@ -16,13 +16,11 @@ endfunction : new
 
 task UartTxBaseSequenceWithPattern :: body();
   req = UartTxTransaction :: type_id :: create("req");
-  repeat(packetsNeeded)begin 
     start_item(req);
     if(!(req.randomize() with{transmissionData == patternToTransmit;}))
       `uvm_fatal("[tx sequence]","randomization failed")
     req.print();
     finish_item(req);
-  end 
 endtask : body
  
 `endif   

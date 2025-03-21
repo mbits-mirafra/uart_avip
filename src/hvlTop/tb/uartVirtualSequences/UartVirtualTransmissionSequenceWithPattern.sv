@@ -16,7 +16,7 @@ class UartVirtualTransmissionSequenceWithPattern extends UartVirtualBaseSequence
   //-------------------------------------------------------
   extern function new(string name = "UartVirtualTransmissionSequenceWithPattern");
   extern virtual task body();
-
+  extern task setConfig(UartTxAgentConfig uartTxAgentConfig);
 endclass : UartVirtualTransmissionSequenceWithPattern
     
 //--------------------------------------------------------------------------------------------
@@ -33,7 +33,6 @@ endfunction : new
 //--------------------------------------------------------------------------------------------
 // task:body
 // Creates the required ports
-//
 // Parameters:
 // phase - stores the current phase
 //--------------------------------------------------------------------------------------------
@@ -41,15 +40,11 @@ endfunction : new
 task UartVirtualTransmissionSequenceWithPattern :: body();
   uartTxBaseSequenceWithPattern = UartTxBaseSequenceWithPattern :: type_id :: create("uartTxBaseSequenceWithPattern");
   uartRxBaseSequence = UartRxBaseSequence :: type_id :: create("uartRxBaseSequence");
-  if(!(uvm_config_db#(UartTxAgentConfig) :: get(null,"","uartTxAgentConfig",uartTxAgentConfig)))
-    `uvm_fatal("[VIRTUAL SEQUENCE]",$sformatf("failed to get the config"))
-  begin 
- //   uartTxBaseSequenceWithPattern.start(p_sequencer.uartTxSequencer);
-     `uvm_do_on_with(uartTxBaseSequenceWithPattern , p_sequencer.uartTxSequencer,{packetsNeeded ==uartTxAgentConfig.packetsNeeded;patternToTransmit==uartTxAgentConfig.patternToTransmit;})
- //  uartRxBaseSequence.start(p_sequencer.uartRxSequencer);
-  end 
-
-
+  `uvm_do_on_with(uartTxBaseSequenceWithPattern , p_sequencer.uartTxSequencer,{packetsNeeded ==uartTxAgentConfig.packetsNeeded;patternToTransmit==uartTxAgentConfig.patternToTransmit;})
 endtask : body
 
+task UartVirtualTransmissionSequenceWithPattern :: setConfig(UartTxAgentConfig uartTxAgentConfig);
+  this.uartTxAgentConfig = uartTxAgentConfig;
+  endtask 
+    
 `endif

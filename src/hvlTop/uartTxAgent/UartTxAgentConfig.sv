@@ -13,20 +13,22 @@ class UartTxAgentConfig extends uvm_object;
 
   // config variables required for transmitting data
   bit hasCoverage;
-  hasParityEnum hasParity;
-  overSamplingEnum uartOverSamplingMethod;
-  baudRateEnum uartBaudRate;
-  dataTypeEnum uartDataType;
-  parityTypeEnum uartParityType;
-  stopBitEnum uartStopBit;
-  rand int packetsNeeded;
-  bit parityErrorInjection;
-  bit framingErrorInjection;
-  bit breakingErrorInjection;
-  bit patternNeeded;
+  int packetsNeeded;
   logic[DATA_WIDTH-1:0]patternToTransmit;
+  baudRateEnum uartBaudRate;
+  bit patternNeeded;
   bit OverSampledBaudFrequencyClk;  
-  //-------------------------------------------------------
+  rand hasParityEnum hasParity;
+  rand overSamplingEnum uartOverSamplingMethod;
+  rand dataTypeEnum uartDataType;
+  rand parityTypeEnum uartParityType;
+  rand stopBitEnum uartStopBit;
+  rand bit parityErrorInjection;
+  rand bit framingErrorInjection;
+  rand bit breakingErrorInjection;
+
+ constraint set_parity_condition{ hasParity==PARITY_DISABLED -> parityErrorInjection==0;}
+ //-------------------------------------------------------
   // Externally defined Tasks and Functions
   //-------------------------------------------------------
   extern function new(string name = "UartTxAgentConfig");

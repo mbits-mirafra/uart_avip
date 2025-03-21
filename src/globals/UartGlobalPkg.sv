@@ -6,7 +6,7 @@ package UartGlobalPkg;
   parameter DATA_WIDTH=8; 
 
   // no. of packets to be transferred
-  parameter NO_OF_PACKETS = 2;
+  parameter NO_OF_PACKETS = 20;
 
 	// indicates start bit
   parameter START_BIT = 0;

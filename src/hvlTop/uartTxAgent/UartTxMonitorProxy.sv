@@ -75,11 +75,23 @@ task UartTxMonitorProxy :: run_phase(uvm_phase phase);
 		  uartTxMonitorBfm.WaitForReset();
       forever begin
 				UartTxTransaction uartTxTransaction_clone;
-				uartTxMonitorBfm.StartMonitoring(uartTxPacketStruct , uartConfigStruct);
-				UartTxSeqItemConverter::toTxClass(uartTxPacketStruct , uartTxAgentConfig , uartTxTransaction);
+				uartTxPacketStruct.transmissionData= 'b x;
+				uartTxTransaction.transmissionData= 'b x;
+				uartTxPacketStruct.breakingError= 'b 0;
+				uartTxPacketStruct.framingError= 'b 0;
+				uartTxPacketStruct.parityError= 'b 0;
 
+				//wait(monitorSynchronizer.triggered);
+				UartTxConfigConverter :: from_Class(uartTxAgentConfig,uartConfigStruct);
+
+				uartTxMonitorBfm.StartMonitoring(uartTxPacketStruct , uartConfigStruct);
+				$write("THE PACKET RECEIVED BY THE TRANSMITTER PROXY IS:");
+				for(int i=0 ;i<uartConfigStruct.uartDataType;i++)
+				  $write("%b",uartTxPacketStruct.transmissionData[i]);
+				$display("\n");
+				UartTxSeqItemConverter::toTxClass(uartTxPacketStruct , uartConfigStruct , uartTxTransaction);
 				$cast(uartTxTransaction_clone, uartTxTransaction.clone());  
-    		uartTxMonitorAnalysisPort.write(uartTxTransaction_clone);
+    		                uartTxMonitorAnalysisPort.write(uartTxTransaction_clone);
 				//->monitorSynchronizer;
        end 
 		end 

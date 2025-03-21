@@ -11,8 +11,10 @@ class UartBaseTest extends uvm_test;
   `uvm_component_utils(UartBaseTest)
  
   UartVirtualTransmissionSequence uartVirtualTransmissionSequence;
+  UartVirtualTransmissionSequenceWithPattern uartVirtualTransmissionSequenceWithPattern;
   UartEnvConfig           uartEnvConfig;
   UartEnv                 uartEnv;
+
   //-------------------------------------------------------
   // Externally defined Tasks and Functions
   //-------------------------------------------------------
@@ -23,7 +25,7 @@ class UartBaseTest extends uvm_test;
   extern virtual function void  setupUartRxAgentConfig();
   extern virtual function void  end_of_elaboration_phase(uvm_phase phase);
   extern virtual task run_phase(uvm_phase phase);
-
+  extern function void copyTxConfigToRx(inout UartTxAgentConfig uartTxAgentConfig ,inout  UartRxAgentConfig uartRxAgentConfig);
 endclass : UartBaseTest
    
 //--------------------------------------------------------------------------------------------
@@ -75,16 +77,10 @@ endfunction : setupUartEnvConfig
   uartEnvConfig.uartTxAgentConfig.packetsNeeded=NO_OF_PACKETS;
   uartEnvConfig.uartTxAgentConfig.is_active = UVM_ACTIVE;
   uartEnvConfig.uartTxAgentConfig.hasCoverage = 1;
-  uartEnvConfig.uartTxAgentConfig.hasParity = PARITY_ENABLED;
   uartEnvConfig.uartTxAgentConfig.uartOverSamplingMethod = OVERSAMPLING_16;
   uartEnvConfig.uartTxAgentConfig.uartBaudRate = BAUD_9600;
-  uartEnvConfig.uartTxAgentConfig.uartDataType = FIVE_BIT;
-  uartEnvConfig.uartTxAgentConfig.uartParityType = EVEN_PARITY;
-  uartEnvConfig.uartTxAgentConfig.parityErrorInjection = 0;
-  uartEnvConfig.uartTxAgentConfig.framingErrorInjection = 0;
-  uartEnvConfig.uartTxAgentConfig.patternNeeded = 0;
-  uartEnvConfig.uartTxAgentConfig.patternToTransmit=10101010;
-  uartEnvConfig.uartTxAgentConfig.breakingErrorInjection = 0;
+  uartEnvConfig.uartTxAgentConfig.patternNeeded = 1;
+  uartEnvConfig.uartTxAgentConfig.patternToTransmit=0;
 
   uartEnvConfig.uartTxAgentConfig.OverSampledBaudFrequencyClk =1;
   uvm_config_db #(UartTxAgentConfig) :: set(null,"*", "uartTxAgentConfig",uartEnvConfig.uartTxAgentConfig);
@@ -98,19 +94,10 @@ endfunction : setupUartTxAgentConfig
 //--------------------------------------------------------------------------------------------
  function void UartBaseTest :: setupUartRxAgentConfig();
   uartEnvConfig.uartRxAgentConfig = UartRxAgentConfig :: type_id :: create("uartRxAgentConfig");
-  uartEnvConfig.uartRxAgentConfig.packetsNeeded=NO_OF_PACKETS;
   uartEnvConfig.uartRxAgentConfig.is_active = UVM_PASSIVE;
   uartEnvConfig.uartRxAgentConfig.hasCoverage = 1;
-  uartEnvConfig.uartRxAgentConfig.hasParity = PARITY_ENABLED;
-  uartEnvConfig.uartRxAgentConfig.uartOverSamplingMethod = OVERSAMPLING_16;
-  uartEnvConfig.uartRxAgentConfig.uartBaudRate = BAUD_9600;
-  uartEnvConfig.uartRxAgentConfig.uartDataType = FIVE_BIT;
-  uartEnvConfig.uartRxAgentConfig.uartParityType = EVEN_PARITY;
-  uartEnvConfig.uartRxAgentConfig.parityErrorInjection =0;
-  uartEnvConfig.uartRxAgentConfig.framingErrorInjection = 0;
   uartEnvConfig.uartRxAgentConfig.OverSampledBaudFrequencyClk =1;
-  uartEnvConfig.uartRxAgentConfig.patternNeeded = 0;
-  uartEnvConfig.uartRxAgentConfig.patternToTransmit=10101010;
+  copyTxConfigToRx(uartEnvConfig.uartTxAgentConfig , uartEnvConfig.uartRxAgentConfig);
   uvm_config_db #(UartRxAgentConfig) :: set(null,"*", "uartRxAgentConfig",uartEnvConfig.uartRxAgentConfig);
 
 endfunction : setupUartRxAgentConfig
@@ -135,13 +122,32 @@ endfunction : end_of_elaboration_phase
 // phase - stores the current phase
 //--------------------------------------------------------------------------------------------
  task UartBaseTest :: run_phase(uvm_phase phase);
-  uartVirtualTransmissionSequence = UartVirtualTransmissionSequence :: type_id :: create("uartVirtualTransmissionSequence");
-  uartVirtualTransmissionSequence.print();
+  uartVirtualTransmissionSequence= UartVirtualTransmissionSequence :: type_id :: create("uartVirtualTransmissionSequence");
+  
   phase.raise_objection(this);
+  repeat(uartEnvConfig.uartTxAgentConfig.packetsNeeded) begin
+
+  if(uartEnvConfig.uartTxAgentConfig.randomize() with{hasParity==PARITY_ENABLED;})
+  uartVirtualTransmissionSequence.setConfig(uartEnvConfig.uartTxAgentConfig);
+  copyTxConfigToRx(uartEnvConfig.uartTxAgentConfig , uartEnvConfig.uartRxAgentConfig);
+
   uartVirtualTransmissionSequence.start(uartEnv.uartVirtualSequencer);
-  #100000;
-  phase.drop_objection(this);
+  end 
+   phase.drop_objection(this);
 endtask : run_phase
+
+function void UartBaseTest :: copyTxConfigToRx(inout UartTxAgentConfig uartTxAgentConfig ,inout  UartRxAgentConfig uartRxAgentConfig);
+       uartRxAgentConfig.hasParity =   uartTxAgentConfig.hasParity;
+       uartRxAgentConfig.uartOverSamplingMethod =   uartTxAgentConfig.uartOverSamplingMethod;
+       uartRxAgentConfig.uartBaudRate =   uartTxAgentConfig.uartBaudRate;
+       uartRxAgentConfig.uartDataType =   uartTxAgentConfig.uartDataType;
+       uartRxAgentConfig.uartParityType =  uartTxAgentConfig.uartParityType;
+       uartRxAgentConfig.parityErrorInjection =  uartTxAgentConfig.parityErrorInjection;
+       uartRxAgentConfig.framingErrorInjection =  uartTxAgentConfig.framingErrorInjection;
+       uartRxAgentConfig.breakingErrorInjection =  uartTxAgentConfig.breakingErrorInjection;
+       uartRxAgentConfig.uartStopBit =  uartTxAgentConfig.uartStopBit;
+
+endfunction
 
 `endif  
 
