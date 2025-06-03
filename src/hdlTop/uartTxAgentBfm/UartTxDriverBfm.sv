@@ -3,6 +3,7 @@
 //-------------------------------------------------------
 import UartGlobalPkg::*;
 
+`timescale 1ns/1ps
 //--------------------------------------------------------------------------------------------
 // Interface : UartTxDriverBfm
 //  Used as the HDL driver for Uart

@@ -68,4 +68,9 @@ module HdlTop;
   UartRxAgentBfm uartRxAgentBfm(uartIf);
 
   
+  initial begin
+    $dumpfile("waveform.vcd");
+    $dumpvars(0, HdlTop); 
+  end
+
 endmodule : HdlTop
