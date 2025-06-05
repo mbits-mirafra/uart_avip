@@ -4,7 +4,6 @@
 
 import UartGlobalPkg::*;
 
-`timescale 1ns/1ps
 //--------------------------------------------------------------------------------------------
 // Interface : UartIf
 // Declaration of pin level signals for Uart interface

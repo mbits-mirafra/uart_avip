@@ -1,5 +1,4 @@
 import UartGlobalPkg::*;
-`timescale 1ns/1ps
 //--------------------------------------------------------------------------------------------
 // Interface : UartTxMonitorBfm
 //  Connects the master monitor bfm with the master monitor prox

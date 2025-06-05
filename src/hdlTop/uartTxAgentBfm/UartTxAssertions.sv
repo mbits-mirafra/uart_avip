@@ -1,7 +1,6 @@
 `ifndef UARTTXASSERTIONS_INCLUDED_
 `define UARTTXASSERTIONS_INCLUDED_
 
-`timescale 1ns/1ps
 import UartGlobalPkg :: *;
 //import UartTxCoverParameter :: *;
 interface UartTxAssertions ( input bit uartClk , input logic uartTx);

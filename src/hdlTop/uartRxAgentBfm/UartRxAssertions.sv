@@ -1,7 +1,6 @@
 `ifndef UARTRXASSERTIONS_INCLUDED_
 `define UARTRXASSERTIONS_INCLUDED_
 
-`timescale 1ns/1ps
 import UartGlobalPkg :: *;
 interface UartRxAssertions ( input bit uartClk , input logic uartRx);
   import uvm_pkg :: *;
